@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikolaj Farbod - AI Research Companion Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(238, 90, 82, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(238, 90, 82, 0.6);
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Project Overview */
+        .project-overview {
+            background: #f8f9ff;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .tech-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .tech-list li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.8rem;
+        }
+
+        /* Step by Step Gallery */
+        .step-gallery {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .steps-container {
+            display: grid;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .step-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-content {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-description {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .step-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .step-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .step-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Source Code Section */
+        .source-section {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+        }
+
+        .source-section h2 {
+            color: white;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: #24292e;
+            color: white;
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .github-link:hover {
+            background: #0366d6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(3, 102, 214, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .step-item {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .step-content {
+                padding: 1rem 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            z-index: 1001;
+            transition: width 0.25s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header>
+        <nav class="container">
+            <div class="logo">Farbod 🫶🏻</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#project">Project</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#source">Source Code</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1 class="fade-in-up">Full Stack GenAI Developer</h1>
+            <p class="fade-in-up">Hi, I'm Farbod (Niko!) and I build end-to-end Full Stack GenAI applications with the most up-to-date methodologies of using these amazing inventions in a Software environment!</p>
+            <a href="#project" class="cta-button fade-in-up">Explore My Project</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="project" class="section project-overview">
+            <h2>DumpedKnowledge - AI Research Companion</h2>
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 3rem; color: #666;">
+                I was overwhelmed reading many websites on a research project I was doing, so I decided to build my own FullStack Research companion. Below is how it transforms simple URL submissions into a queryable, intelligent knowledge repository.
+            </p>
+
+            <div class="tech-grid">
+                <div class="tech-section">
+                    <h3>🔧 Backend Technologies</h3>
+                    <ul class="tech-list">
+                        <li><strong>FastAPI</strong> - Python web framework</li>
+                        <li><strong>SQLite</strong> - Database for user accounts and article metadata</li>
+                        <li><strong>SQLAlchemy</strong> - ORM for database operations</li>
+                        <li><strong>JWT</strong> - Authentication using JSON Web Tokens</li>
+                        <li><strong>OpenAI API</strong> - For question-answering functionality</li>
+                        <li><strong>ChromaDB</strong> - Vector database for embeddings storage</li>
+                        <li><strong>BeautifulSoup</strong> - Web scraping and content extraction</li>
+                    </ul>
+                </div>
+                <div class="tech-section">
+                    <h3>🎨 Frontend Technologies</h3>
+                    <ul class="tech-list">
+                        <li><strong>Next.js 15</strong> - React framework with App Router</li>
+                        <li><strong>NextAuth.js</strong> - Authentication</li>
+                        <li><strong>Tailwind CSS 4</strong> - Styling</li>
+                        <li><strong>TypeScript</strong> - Type safety</li>
+                        <li><strong>Axios</strong> - HTTP client for API requests</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">🔮 The RAG Magic</h3>
+                <p style="color: #666; line-height: 1.7;">
+                    When users search or ask questions, their query is embedded using the appropriate  model and compared against all their article chunks using cosine similarity in ChromaDB. The system retrieves the most relevant chunks, deduplicates by article ID, and uses an adaptive threshold system to ensure quality context. The selected content chunks are assembled into a comprehensive context and fed to an OpenAI Foundation model along with the user's question, generating detailed answers that cite specific source articles.
+                </p>
+            </div>
+        </section>
+
+        <section id="demo" class="section step-gallery">
+            <h2>Step-by-Step Experience</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 3rem;">
+                Experience the journey of transforming web content into intelligent, searchable knowledge
+            </p>
+            
+            <div class="steps-container">
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Welcome to Your Research Companion</h3>
+                        <p class="step-description">
+                            Start your journey with a clean, intuitive landing page designed for researchers who need to organize and query their knowledge effectively. The modern interface welcomes you to a new way of managing research content.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step1-Landing.png" alt="Landing page of the research companion" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Secure User Registration</h3>
+                        <p class="step-description">
+                            Create your personalized research vault with secure JWT authentication. Each user gets their own private knowledge base, ensuring your research remains organized and protected while enabling powerful search capabilities.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step2-UserRegistration.png" alt="User registration interface" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Simply Paste Any URL</h3>
+                        <p class="step-description">
+                            The magic begins with a simple URL paste. Whether it's a research paper, article, or blog post, just drop the link and let the system handle the rest. No complex uploads or manual text entry required.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step3-LetsPasteaURL.png" alt="URL input interface" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Intelligent Content Processing</h3>
+                        <p class="step-description">
+                            Watch as BeautifulSoup scrapes and cleans the content, filtering out ads and navigation. The text is chunked into 800-character segments and converted to vector embeddings using OpenAI's text-embedding-3-small model, then stored in ChromaDB for lightning-fast retrieval.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step4-ScrapeandSaveTheData.png" alt="Content processing and storage interface" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Explore Your Knowledge Base</h3>
+                        <p class="step-description">
+                            Browse through your collected articles with rich metadata and similarity scores. Each piece of content is intelligently indexed and ready for semantic search. Select any article to dive deeper or prepare for AI-powered questioning.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step5-LetsChooseADetailForGettingAnAnswer.png" alt="Knowledge base exploration interface" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="step-item fade-in-up">
+                    <div class="step-content">
+                        <div class="step-number">6</div>
+                        <h3 class="step-title">AI-Powered Research Assistant</h3>
+                        <p class="step-description">
+                            Ask complex questions and receive detailed, contextual answers. The RAG system finds the most relevant content chunks, feeds them to OpenAI's foundation models, and generates comprehensive responses with source citations. Your personal research companion understands your collected knowledge and helps you discover insights.
+                        </p>
+                    </div>
+                    <div class="step-image">
+                        <img src="images/Step6-LetsUseTheCompanionToGetOurAnswer.png" alt="AI question-answering interface" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="source" class="section source-section">
+            <h2>View the Source Code</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                Explore the complete implementation of this Full Stack GenAI application
+            </p>
+            <a href="https://github.com/FarbodDadkhah/DumpedKnowledge" class="github-link" target="_blank" rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Fade in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
